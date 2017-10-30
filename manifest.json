@@ -1,0 +1,19 @@
+{
+	"manifest_version": 2,
+	"name": "Window Swapper",
+	"description": "An extension to swap the position of two open windows in Chrome",
+	"version": "0.1",
+
+	"background": {
+		"persistent": false,
+		"scripts": ["swap.js"]
+	},
+	"browser_action": {
+		"default_icon": "icon.png",
+		"default_title": "Window Swapper"
+	},
+	"permissions": [
+		"tabs",
+		"notifications"
+	]
+}
