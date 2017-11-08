@@ -1,6 +1,5 @@
 var currentWindow = null,
 	otherWindow = null,
-	currentWindowSvg = null,
 	scale = 16;
 
 chrome.system.display.getInfo(function(displays) {
@@ -30,7 +29,7 @@ chrome.system.display.getInfo(function(displays) {
 chrome.windows.getLastFocused(getWindows);
 
 function getWindows(focusedWindow) {
-	currentWindowSvg = focusedWindow;
+	currentWindow = focusedWindow;
 	chrome.windows.getAll(createWindowRects);
 }
 
@@ -38,7 +37,7 @@ function createWindowRects(windows) {
 	var svg = document.getElementById("mini-svg"),
 		color = null;
 	windows.forEach(function(window) {
-		if (currentWindowSvg.id == window.id) {
+		if (currentWindow.id == window.id) {
 			color = "#ff0000";
 		} else {
 			color = "#4CAF50";
@@ -54,20 +53,13 @@ function createWindowRects(windows) {
 		rect.setAttribute("stroke", color);
 		svg.appendChild(rect);
 		document.getElementById(window.id.toString()).addEventListener("click", function() {
-			swapTarget(window);
+			swapWindows(window);
 		});
 	});
 }
 
-function swapTarget(targetWindow) {
-	otherWindow = targetWindow;
-	chrome.windows.getCurrent(swapWindows);
-}
-
 function swapWindows(win) {
-	currentWindow = win;
-	console.log(currentWindow.id);
-	console.log(otherWindow.id);
+	otherWindow = win;
 	if (currentWindow.id != otherWindow.id) {
 		if (currentWindow.state != "minimized" && otherWindow.state != "minimized") {
 			chrome.windows.update(currentWindow.id,
@@ -92,9 +84,3 @@ function swapWindows(win) {
 		}
 	}
 }
-
-/*
-chrome.commands.onCommand.addListener(function(command) {
-	chrome.windows.getLastFocused(getFocusedWindow);
-});
-*/
