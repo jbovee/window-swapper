@@ -36,24 +36,24 @@ function getWindows(focusedWindow) {
 function createWindowRects(windows) {
 	var svg = document.getElementById("mini-svg"),
 		color = null;
-	windows.forEach(function(window) {
-		if (currentWindow.id == window.id) {
+	windows.forEach(function(win) {
+		if (currentWindow.id == win.id) {
 			color = "#ff0000";
 		} else {
 			color = "#4CAF50";
 		}
 		var rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-		rect.setAttribute("id", window.id);
+		rect.setAttribute("id", win.id);
 		rect.setAttribute("class", "window");
-		rect.setAttribute("x", (window.left/scale));
-		rect.setAttribute("y", (window.top/scale));
-		rect.setAttribute("width", (window.width/scale));
-		rect.setAttribute("height", (window.height/scale));
+		rect.setAttribute("x", (win.left/scale));
+		rect.setAttribute("y", (win.top/scale));
+		rect.setAttribute("width", (win.width/scale));
+		rect.setAttribute("height", (win.height/scale));
 		rect.setAttribute("fill", color);
 		rect.setAttribute("stroke", color);
 		svg.appendChild(rect);
-		document.getElementById(window.id.toString()).addEventListener("click", function() {
-			swapWindows(window);
+		document.getElementById(win.id.toString()).addEventListener("click", function() {
+			swapWindows(win);
 		});
 	});
 }
@@ -81,6 +81,7 @@ function swapWindows(win) {
 			if (currentWindow.state != "normal") {
 				chrome.windows.update(otherWindow.id, {state: currentWindow.state});
 			}
+			window.close();
 		}
 	}
 }
