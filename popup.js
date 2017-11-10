@@ -53,35 +53,7 @@ function createWindowRects(windows) {
 		rect.setAttribute("stroke", color);
 		svg.appendChild(rect);
 		document.getElementById(win.id.toString()).addEventListener("click", function() {
-			swapWindows(win);
+			chrome.runtime.sendMessage({type: "popup_swap", fWin: currentWindow, cWin: win});
 		});
 	});
-}
-
-function swapWindows(win) {
-	otherWindow = win;
-	if (currentWindow.id != otherWindow.id) {
-		if (currentWindow.state != "minimized" && otherWindow.state != "minimized") {
-			chrome.windows.update(currentWindow.id,
-				{top: otherWindow.top,
-				left: otherWindow.left,
-				width: otherWindow.width,
-				height: otherWindow.height,
-				focused: otherWindow.focused});
-			if (otherWindow.state != "normal") {
-				chrome.windows.update(currentWindow.id, {state: otherWindow.state});
-			}
-
-			chrome.windows.update(otherWindow.id,
-				{top: currentWindow.top,
-				left: currentWindow.left,
-				width: currentWindow.width,
-				height: currentWindow.height,
-				focused: currentWindow.focused});
-			if (currentWindow.state != "normal") {
-				chrome.windows.update(otherWindow.id, {state: currentWindow.state});
-			}
-			window.close();
-		}
-	}
 }
