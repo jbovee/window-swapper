@@ -10,3 +10,6 @@ A Chrome extension for swapping the location of two open windows. At the moment 
 - Notifications/alerts for when attempted actions don't work
 - Popup window from extension icon with buttons for swapping
 - Keyboard shortcut(s)
+  - ~~Base shortcut for only two open windows~~
+  - By number 0-9
+  - Using arrows keys
