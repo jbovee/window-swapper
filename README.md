@@ -6,7 +6,7 @@ Window Swapper adds the functionality of quickly swapping the location of two op
 
 ![Close up of popup](promo)
 
-[promo]: https://raw.githubusercontent.com/jbovee/window-swapper/master/images/promo_tile.png "Closeup of popup"
+[promo]: https://github.com/jbovee/window-swapper/raw/master/images/promo_tile.png "Closeup of popup"
 
 # Future Ideas
 - Selecting a specific window to swap with
