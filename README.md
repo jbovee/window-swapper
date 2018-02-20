@@ -4,6 +4,10 @@ A Chrome extension for swapping the location of two open windows.
 ## About
 Window Swapper adds the functionality of quickly swapping the location of two open Google Chrome windows. Can currently be triggered with a keyboard shortcut (default **should** be set to Alt+s) when only two windows are open, or by clicking the icon and selecting which window to swap the current with.
 
+![Close up of popup](promo)
+
+[promo]: https://raw.githubusercontent.com/jbovee/window-swapper/master/images/promo_tile.png "Closeup of popup"
+
 # Future Ideas
 - Selecting a specific window to swap with
   - By number
