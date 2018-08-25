@@ -16,5 +16,6 @@ Window Swapper adds the functionality of quickly swapping the location of two op
 - ~~Popup window from extension icon with buttons for swapping~~
 - Keyboard shortcut(s)
   - ~~Base shortcut for only two open windows~~
-  - By number 0-9
+  - By number 0-9 (some sort of popup to show available windows to swap with and their number)
   - Using arrows keys
+- Saving and loading layouts
