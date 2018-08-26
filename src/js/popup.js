@@ -41,7 +41,7 @@ function getWindows(focusedWindow) {
 function createWindowRects(windows) {
 	var svg = document.getElementById("mini-svg"),
 		color = null;
-	windows.forEach(function(win) {
+	windows.forEach(function(win,i) {
 		if (currentWindow.id == win.id) {
 			color = "#ff0000";
 		} else {
@@ -57,6 +57,15 @@ function createWindowRects(windows) {
 		rect.setAttribute("fill", color);
 		rect.setAttribute("stroke", color);
 		svg.appendChild(rect);
+		var label = document.createElementNS("http://www.w3.org/2000/svg", "text");
+		label.setAttribute("x", (win.left/scale) + (win.width/scale) / 2);
+		label.setAttribute("y", 8 + (win.top/scale) + (win.height/scale)/2);
+		label.setAttribute("fill", color);
+		label.setAttribute("font-size", 24);
+		label.setAttribute("text-anchor", "middle");
+		label.setAttribute("alignment-baseline", "center")
+		label.textContent = `${i+1}`;
+		svg.appendChild(label);
 		document.getElementById(win.id.toString()).addEventListener("click", function() {
 			chrome.runtime.sendMessage({type: "popup_swap", fWin: currentWindow, cWin: win});
 		});
