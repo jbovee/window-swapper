@@ -1,7 +1,8 @@
 window.onload = () => {
 	currentWindow = null,
 	otherWindow = null,
-	scale = 10;
+	scale = 10,
+	xmlns = "http://www.w3.org/2000/svg";
 
 	createMiniDisplays();
 	chrome.windows.getLastFocused(getWindows);
@@ -17,7 +18,7 @@ const createMiniDisplays = () => {
 			const h = display.bounds.top + display.bounds.height;
 			if (w > maxW) {maxW = w;}
 			if (h > maxH) {maxH = h;}
-			const rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+			const rect = document.createElementNS(xmlns, "rect");
 			rect.setAttribute("x", (display.bounds.left/scale));
 			rect.setAttribute("y", (display.bounds.top/scale));
 			rect.setAttribute("width", (display.bounds.width/scale));
@@ -43,7 +44,7 @@ const createWindowRects = windows => {
 	let color = null;
 	windows.forEach((win,i) => {
 		color = (currentWindow.id == win.id) ? "#ff0000" : "#4CAF50";
-		const rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+		const rect = document.createElementNS(xmlns, "rect");
 		rect.setAttribute("id", win.id);
 		rect.setAttribute("class", "window");
 		rect.setAttribute("x", (win.left/scale));
@@ -53,7 +54,7 @@ const createWindowRects = windows => {
 		rect.setAttribute("fill", color);
 		rect.setAttribute("stroke", color);
 		svg.appendChild(rect);
-		const label = document.createElementNS("http://www.w3.org/2000/svg", "text");
+		const label = document.createElementNS(xmlns, "text");
 		label.setAttribute("x", (win.left/scale) + (win.width/scale) / 2);
 		label.setAttribute("y", 8 + (win.top/scale) + (win.height/scale)/2);
 		label.setAttribute("fill", color);
