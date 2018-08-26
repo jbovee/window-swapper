@@ -1,11 +1,9 @@
-rect {
-	fill-opacity: 0.1;
-	stroke-opacity: 0.2;
+.window {
+	opacity: 0.25;
 	-webkit-transition: all .2s ease-in-out;
 	-moz-transition: all .2s ease-in-out;
 }
 
-rect.window:hover {
-	fill-opacity: 0.5;
-	stroke-opacity: 0.6;
+.window:hover {
+	opacity: 1;
 }
