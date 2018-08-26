@@ -56,14 +56,19 @@ const createWindowRects = windows => {
 		rect.setAttribute("fill", color);
 		rect.setAttribute("fill-opacity", 0.4);
 		rect.setAttribute("stroke", color);
+		rect.setAttribute("stroke-width", 0.5);
 		rect.setAttribute("stroke-opacity", 0.8);
 		g.appendChild(rect);
 		const label = document.createElementNS(xmlns, "text");
 		label.setAttribute("x", (win.left/scale) + (win.width/scale) / 2);
 		label.setAttribute("y", 8 + (win.top/scale) + (win.height/scale)/2);
-		label.setAttribute("fill", color);
-		label.setAttribute("fill-opacity", 0.8);
+		label.setAttribute("fill", "#ffffff");
+		label.setAttribute("fill-opacity", 1);
+		label.setAttribute("stroke", color);
+		label.setAttribute("stroke-width", 0.5);
+		label.setAttribute("stroke-opacity", 1);
 		label.setAttribute("font-size", 24);
+		label.setAttribute("font-weight", "bold");
 		label.setAttribute("text-anchor", "middle");
 		label.setAttribute("alignment-baseline", "center")
 		label.textContent = `${i+1}`;
