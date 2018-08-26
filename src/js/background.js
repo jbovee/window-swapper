@@ -1,6 +1,4 @@
-// I have this here, but it doesn't actually do anything yet
-
-function swapWindowsT(currentW, targetW) {
+const swapWindowsT = (currentW, targetW) => {
 	if (currentW.id != targetW.id) {
 		if (currentW.state != "minimized" && targetW.state != "minimized") {
 			chrome.windows.update(currentW.id,
@@ -27,19 +25,19 @@ function swapWindowsT(currentW, targetW) {
 	}
 }
 
-chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 	if (request.type == "popup_swap") {
 		swapWindowsT(request.fWin, request.cWin);
 	}
 });
 
-chrome.commands.onCommand.addListener(function(command) {
+chrome.commands.onCommand.addListener(command => {
 	switch(command) {
 		case "base":
-			chrome.windows.getLastFocused(function(fWin) {
-				chrome.windows.getAll(function(windows) {
+			chrome.windows.getLastFocused(fWin => {
+				chrome.windows.getAll(windows => {
 					if (windows.length == 2) {
-						windows.forEach(function(win) {
+						windows.forEach(win => {
 							if (fWin.id != win.id) swapWindowsT(fWin, win);
 						});
 					}
