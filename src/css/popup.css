@@ -1,0 +1,12 @@
+#layout-buttons {
+    display: flex;
+    margin-bottom: 8px;
+}
+
+#layout-buttons button {
+    flex-grow: 1;
+}
+
+#layout-buttons button + button {
+    margin-left: 4px;
+}
