@@ -3,21 +3,11 @@ window.onload = () => {
 	xmlns = "http://www.w3.org/2000/svg";
 
 	showPage("main");
-	chrome.system.display.getInfo(displays => {
-		chrome.windows.getAll(windows => {
-			chrome.windows.getLastFocused(last => {
-				let data = {
-					id: "1",
-					name: "basic",
-					displays: [...displays].map(display => display.bounds),
-					windows: windows,
-					last: last
-				};
-				createMini("#main",data);
-			})
-		})
+	getData(true).then(data => {
+		console.log(data);
+		let div = document.querySelector("#main").querySelector(".screens");
+		div.appendChild(createMini(data));
 	});
-	document.getElementById("layout-save").addEventListener("click", () => showPage("save"));
 }
 
 const showPage = pageId => {
@@ -29,16 +19,28 @@ const showPage = pageId => {
 	document.getElementById(pageId).style.display = "block";
 }
 
-const createMini = (target,data) => {
-	let div = document.querySelector(target).querySelector(".screens");
-	let svg = document.createElementNS(xmlns, "svg");
-	createMiniDisplays(data,svg);
-	createMiniWindows(data,svg);
-	div.appendChild(svg);
+const getData = getLast => {
+	// getLastFocused needs to be the outermost call
+	// otherwise the others mess with it and you don't get the correct window
+	chrome.windows.getLastFocused(last => {
+		chrome.windows.getAll(windows => {
+			chrome.system.display.getInfo(displays => {
+				let lastWin = (getLast) ? last : null;
+				return Promise.resolve({
+					id: "1",
+					name: "basic",
+					displays: displays.map(display => display.bounds),
+					windows: windows,
+					last: lastWin
+				});
+			})
+		})
+	})
 }
 
-const createMiniDisplays = (data,svg) => {
-	let maxH = 0,
+const createMini = data => {
+	let svg = document.createElementNS(xmlns, "svg"),
+		maxH = 0,
 		maxW = 0;
 	data.displays.forEach(display => {
 		const w = display.left + display.width;
@@ -58,11 +60,9 @@ const createMiniDisplays = (data,svg) => {
 	});
 	svg.setAttribute("height", maxH/scale);
 	svg.setAttribute("width", maxW/scale);
-}
 
-const createMiniWindows = (data,svg) => {
 	data.windows.forEach((win,i) => {
-		let color = (data.last && data.last.id == win.id) ? "#ff0000" : "#4CAF50";
+		let color = (data.last && (data.last.id === win.id)) ? "#ff0000" : "#4CAF50";
 		const g = document.createElementNS(xmlns, "g");
 		g.setAttribute("id", win.id);
 		g.setAttribute("class", "window");
@@ -99,4 +99,5 @@ const createMiniWindows = (data,svg) => {
 		g.appendChild(label);
 		svg.appendChild(g);
 	});
+	return svg;
 }
