@@ -1,12 +1,16 @@
-#layout-buttons {
+.layout-buttons {
     display: flex;
     margin-bottom: 8px;
 }
 
-#layout-buttons button {
+.layout-buttons button {
     flex-grow: 1;
 }
 
-#layout-buttons button + button {
+.layout-buttons input {
+    flex-grow: 2;
+}
+
+.layout-buttons button + button, .layout-buttons input + button {
     margin-left: 4px;
 }

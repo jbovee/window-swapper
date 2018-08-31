@@ -34,3 +34,16 @@ button:active {
 	border-color: #1abc9c;
 	box-shadow: 0px 0px 6px 0px #1abc9c;
 }
+
+input {
+	border: 1px solid #1abc9c;
+	border-radius: 2px;
+	outline: none;
+	padding: 8px;
+	user-select: none;
+}
+
+input:focus {
+	border-color: #4bc6ae;
+	box-shadow: 0px 0px 6px 0px #1abc9c;
+}
