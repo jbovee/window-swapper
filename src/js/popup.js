@@ -8,6 +8,14 @@ window.onload = () => {
 		let div = document.querySelector("#main").querySelector(".screens");
 		div.appendChild(createMini(data));
 	});
+	getData(false).then(data => {
+		console.log(data);
+		let div = document.querySelector("#save").querySelector(".screens");
+		div.appendChild(createMini(data));
+	});
+	document.getElementById("layout-save").addEventListener("click", () => {
+		showPage("save");
+	});
 	document.getElementById("save-back").addEventListener("click", () => {
 		showPage("main");
 	});
