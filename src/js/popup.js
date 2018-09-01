@@ -20,19 +20,21 @@ const showPage = pageId => {
 }
 
 const getData = getLast => {
-	// getLastFocused needs to be the outermost call
-	// otherwise the others mess with it and you don't get the correct window
-	chrome.windows.getLastFocused(last => {
-		chrome.windows.getAll(windows => {
-			chrome.system.display.getInfo(displays => {
-				let lastWin = (getLast) ? last : null;
-				return Promise.resolve({
-					id: "1",
-					name: "basic",
-					displays: displays.map(display => display.bounds),
-					windows: windows,
-					last: lastWin
-				});
+	return new Promise(resolve => {
+		// getLastFocused needs to be the outermost call
+		// otherwise the others mess with it and you don't get the correct window
+		chrome.windows.getLastFocused(last => {
+			chrome.windows.getAll(windows => {
+				chrome.system.display.getInfo(displays => {
+					let lastWin = (getLast) ? last : null;
+					resolve({
+						id: "1",
+						name: "basic",
+						displays: displays.map(display => display.bounds),
+						windows: windows,
+						last: lastWin
+					});
+				})
 			})
 		})
 	})
