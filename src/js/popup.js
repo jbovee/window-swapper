@@ -1,5 +1,5 @@
 window.onload = () => {
-	scale = 10,
+	scale = 8,
 	xmlns = "http://www.w3.org/2000/svg";
 
 	showPage("main");
