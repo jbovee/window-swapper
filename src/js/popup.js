@@ -8,6 +8,9 @@ window.onload = () => {
 		let div = document.querySelector("#main").querySelector(".screens");
 		div.appendChild(createMini(data));
 	});
+	document.getElementById("save-back").addEventListener("click", () => {
+		showPage("main");
+	});
 }
 
 const showPage = pageId => {
