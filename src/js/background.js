@@ -31,6 +31,12 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 	}
 });
 
+chrome.runtime.onInstalled.addListener(details => {
+	chrome.storage.local.get({ counter: 0, layouts: [] }, results => {
+		chrome.storage.local.set({ counter: results.counter, layouts: results.layouts });
+	});
+});
+
 chrome.commands.onCommand.addListener(command => {
 	switch(command) {
 		case "base":
