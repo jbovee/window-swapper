@@ -30,6 +30,7 @@
 	},
 	"permissions": [
 		"tabs",
+		"storage",
 		"system.display"
 	]
 }
