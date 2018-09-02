@@ -37,14 +37,16 @@ const getData = getLast => {
 		chrome.windows.getLastFocused(last => {
 			chrome.windows.getAll(windows => {
 				chrome.system.display.getInfo(displays => {
-					let lastWin = (getLast) ? last : null;
-					resolve({
-						id: "1",
-						name: "basic",
-						displays: displays.map(display => display.bounds),
-						windows: windows,
-						last: lastWin
-					});
+					chrome.storage.local.get(["counter"], results => {
+						let lastWin = (getLast) ? last : null;
+						resolve({
+							id: results.counter+1,
+							name: `layout-${results.counter+1}`,
+							displays: displays.map(display => display.bounds),
+							windows: windows,
+							last: lastWin
+						});
+					})
 				})
 			})
 		})
