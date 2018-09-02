@@ -4,14 +4,25 @@ window.onload = () => {
 
 	showPage("main");
 	getData(true).then(data => {
-		console.log(data);
 		let div = document.querySelector("#main").querySelector(".screens");
 		div.appendChild(createMini(data));
 	});
 	getData(false).then(data => {
-		console.log(data);
 		let div = document.querySelector("#save").querySelector(".screens");
 		div.appendChild(createMini(data));
+		let input = document.getElementById("save-name");
+		input.setAttribute("placeholder", data.name);
+		document.getElementById("save-new").addEventListener("click", () => {
+			chrome.storage.local.get(["counter","layouts"], results => {
+				let name = (input.value) ? input.value : input.placeholder;
+				data["name"] = name;
+				data = Object.entries(data).filter(entry => entry[0] !== "last").reduce((obj, [k, v]) => ({ ...obj, [k]: v }), {})
+				results.layouts.push(data);
+				console.log(results.layouts);
+				results.counter++;
+				chrome.storage.local.set({ counter: results.counter, layouts: results.layouts });
+			});
+		});
 	});
 	document.getElementById("layout-save").addEventListener("click", () => {
 		showPage("save");
@@ -22,7 +33,6 @@ window.onload = () => {
 }
 
 const showPage = pageId => {
-	console.log(`Showing ${pageId}`);
 	let pages = ["main", "save", "load"];
 	pages.filter(page => page !== pageId).forEach(page => {
 		document.getElementById(page).style.display = "none";
