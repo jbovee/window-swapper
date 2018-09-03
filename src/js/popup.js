@@ -27,7 +27,13 @@ window.onload = () => {
 	document.getElementById("layout-save").addEventListener("click", () => {
 		showPage("save");
 	});
+	document.getElementById("layout-load").addEventListener("click", () => {
+		showPage("load");
+	});
 	document.getElementById("save-back").addEventListener("click", () => {
+		showPage("main");
+	});
+	document.getElementById("load-back").addEventListener("click", () => {
 		showPage("main");
 	});
 }
