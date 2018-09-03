@@ -14,3 +14,9 @@
 .layout-buttons button + button, .layout-buttons input + button {
     margin-left: 4px;
 }
+
+#none-svg text {
+    font-size: 18px;
+    font-family: sans-serif;
+    fill: silver;
+}

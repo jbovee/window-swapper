@@ -24,6 +24,22 @@ window.onload = () => {
 			});
 		});
 	});
+	chrome.system.display.getInfo(displays => {
+		let maxW = 0,
+			maxH = 0;
+		displays.forEach(display => {
+			const w = display.bounds.left + display.bounds.width;
+			const h = display.bounds.top + display.bounds.height;
+			if (w > maxW) {maxW = w;}
+			if (h > maxH) {maxH = h;}
+		});
+		let svg = document.getElementById("none-svg");
+		let text = svg.children[0];
+		svg.setAttribute("width", (maxW/scale));
+		svg.setAttribute("height", (maxH/scale));
+		text.setAttribute("x", (maxW/scale) / 2);
+		text.setAttribute("y", 8 + (maxH/scale) / 2);
+	});
 	document.getElementById("layout-save").addEventListener("click", () => {
 		showPage("save");
 	});
