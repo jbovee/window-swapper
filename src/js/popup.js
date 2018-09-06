@@ -38,6 +38,7 @@ window.onload = () => {
 		text.setAttribute("x", (maxW/scale) / 2);
 		text.setAttribute("y", 8 + (maxH/scale) / 2);
 	});
+	chrome.runtime.sendMessage({ type: "update_list" });
 	document.getElementById("layout-save").addEventListener("click", () => {
 		showPage("save");
 	});

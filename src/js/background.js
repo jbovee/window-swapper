@@ -64,8 +64,10 @@ const updateSavePH = newCounter => {
 }
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-	if (request.type == "popup_swap") {
+	if (request.type === "popup_swap") {
 		swapWindowsT(request.fWin, request.cWin);
+	} else if (request.type === "update_list") {
+		updateLayoutList();
 	}
 });
 
