@@ -25,9 +25,43 @@ const swapWindowsT = (currentW, targetW) => {
 	}
 }
 
+const updateLayoutList = () => {
+	chrome.storage.local.get(["counter","layouts"], results => {
+		let popupDoc = chrome.extension.getViews({ type: "popup" })[0].document;
+		if (results.counter === 0) {
+			popupDoc.getElementById("layout-list").style.display = "none";
+			popupDoc.getElementById("none-svg").style.display = "block";
+		} else {
+			popupDoc.getElementById("none-svg").style.display = "none";
+			popupDoc.getElementById("layout-list").style.display = "block";
+			let list = popupDoc.getElementById("layout-list");
+			list.innerHTML = "";
+			results.layouts.forEach(layout => {
+				let div = popupDoc.createElement("div");
+				div.setAttribute("class", "list-item");
+				let titleDiv = popupDoc.createElement("div");
+				titleDiv.setAttribute("class", "list-title");
+				let title = popupDoc.createElement("h3");
+				title.innerText = layout.name;
+				titleDiv.appendChild(title);
+				let screensDiv = popupDoc.createElement("div");
+				screensDiv.setAttribute("class", "list-screens");
+				let buttonsDiv = popupDoc.createElement("div");
+				buttonsDiv.setAttribute("class", "list-buttons");
+				div.appendChild(titleDiv);
+				div.appendChild(screensDiv);
+				div.appendChild(buttonsDiv);
+				list.appendChild(div);
+			})
+		}
+	});
+}
+
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 	if (request.type == "popup_swap") {
 		swapWindowsT(request.fWin, request.cWin);
+	} else if (request.type == "update_list") {
+		updateLayoutList();
 	}
 });
 
