@@ -60,8 +60,6 @@ const updateLayoutList = () => {
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 	if (request.type == "popup_swap") {
 		swapWindowsT(request.fWin, request.cWin);
-	} else if (request.type == "update_list") {
-		updateLayoutList();
 	}
 });
 
@@ -69,6 +67,10 @@ chrome.runtime.onInstalled.addListener(details => {
 	chrome.storage.local.get({ counter: 0, layouts: [] }, results => {
 		chrome.storage.local.set({ counter: results.counter, layouts: results.layouts });
 	});
+});
+
+chrome.storage.onChanged.addListener((changes,areaName) => {
+	updateLayoutList();
 });
 
 chrome.commands.onCommand.addListener(command => {

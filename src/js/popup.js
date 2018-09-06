@@ -42,7 +42,6 @@ window.onload = () => {
 		showPage("save");
 	});
 	document.getElementById("layout-load").addEventListener("click", () => {
-		chrome.runtime.sendMessage({ type: "update_list" });
 		showPage("load");
 	});
 	document.getElementById("save-back").addEventListener("click", () => {
