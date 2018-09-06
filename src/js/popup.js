@@ -23,13 +23,11 @@ window.onload = () => {
 				chrome.storage.local.set({ counter: results.counter, layouts: results.layouts });
 			});
 		});
-	});
-	chrome.system.display.getInfo(displays => {
 		let maxW = 0,
 			maxH = 0;
-		displays.forEach(display => {
-			const w = display.bounds.left + display.bounds.width;
-			const h = display.bounds.top + display.bounds.height;
+		data.displays.forEach(display => {
+			const w = display.left + display.width;
+			const h = display.top + display.height;
 			if (w > maxW) {maxW = w;}
 			if (h > maxH) {maxH = h;}
 		});
