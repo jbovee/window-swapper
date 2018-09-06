@@ -57,6 +57,12 @@ const updateLayoutList = () => {
 	});
 }
 
+const updateSavePH = newCounter => {
+	let popupDoc = chrome.extension.getViews({ type: "popup" })[0].document;
+	let input = popupDoc.getElementById("save-name");
+	input.setAttribute("placeholder", `layout-${newCounter+1}`);
+}
+
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 	if (request.type == "popup_swap") {
 		swapWindowsT(request.fWin, request.cWin);
@@ -71,6 +77,7 @@ chrome.runtime.onInstalled.addListener(details => {
 
 chrome.storage.onChanged.addListener((changes,areaName) => {
 	updateLayoutList();
+	updateSavePH(changes.counter.newValue);
 });
 
 chrome.commands.onCommand.addListener(command => {
