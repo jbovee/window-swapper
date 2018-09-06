@@ -12,8 +12,15 @@ window.onload = () => {
 		div.appendChild(createMini(data));
 		let input = document.getElementById("save-name");
 		input.setAttribute("placeholder", data.name);
-		document.getElementById("save-new").addEventListener("click", () => {
+		let saveBtn = document.getElementById("save-new");
+		saveBtn.addEventListener("click", () => {
 			chrome.storage.local.get(["counter","layouts"], results => {
+				saveBtn.disabled = true;
+				saveBtn.textContent = "Saved!";
+				setTimeout(() => {
+					saveBtn.disabled = false;
+					saveBtn.textContent = "Save";
+				}, 3000);
 				let name = (input.value) ? input.value : input.placeholder;
 				data["name"] = name;
 				data = Object.entries(data).filter(entry => entry[0] !== "last").reduce((obj, [k, v]) => ({ ...obj, [k]: v }), {})

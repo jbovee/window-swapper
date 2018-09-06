@@ -35,6 +35,11 @@ button:active {
 	box-shadow: 0px 0px 6px 0px #1abc9c;
 }
 
+button:disabled {
+	background-color: #5ea395;
+	cursor: auto;
+}
+
 input {
 	border: 1px solid #1abc9c;
 	border-radius: 2px;
