@@ -27,6 +27,12 @@ const swapWindowsT = (currentW, targetW) => {
 
 const updateLayoutList = (counter,layouts) => {
 	let popupDoc = chrome.extension.getViews({ type: "popup" })[0].document;
+	if (counter < 2) {
+		popupDoc.getElementById("load").querySelector(".layout-buttons").style.width = "calc(100% - 16px)";
+	} else {
+		popupDoc.getElementById("load").querySelector(".layout-buttons").style.width = "calc(100% - 33px)";
+		popupDoc.getElementById("load").querySelector(".layout-buttons").style.marginRight = 0;
+	}
 	if (counter === 0) {
 		popupDoc.getElementById("layout-list").style.display = "none";
 		popupDoc.getElementById("none-svg").style.display = "block";
