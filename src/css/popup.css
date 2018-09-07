@@ -18,4 +18,17 @@ html, body {
 
 .layout-buttons button + button, .layout-buttons input + button {
     margin-left: 4px;
+
+.list-title {
+    display: flex;
+}
+
+.list-title h3 {
+    flex-grow: 4;
+    margin-top: 6px;
+    margin-bottom: 6px;
+}
+
+.list-title button {
+    flex-grow: 1;
 }

@@ -42,7 +42,10 @@ const updateLayoutList = (counter,layouts) => {
 			titleDiv.setAttribute("class", "list-title");
 			let title = popupDoc.createElement("h3");
 			title.innerText = layout.name;
+			let loadBtn = popupDoc.createElement("button");
+			loadBtn.innerText = "Load";
 			titleDiv.appendChild(title);
+			titleDiv.appendChild(loadBtn);
 			let screensDiv = popupDoc.createElement("div");
 			screensDiv.setAttribute("class", "list-screens");
 			screensDiv.appendChild(createMini(layout));
