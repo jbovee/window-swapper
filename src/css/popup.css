@@ -19,6 +19,13 @@ html, body {
 .layout-buttons button + button, .layout-buttons input + button {
     margin-left: 4px;
 
+#layout-list hr {
+    border: 0;
+    height: 1px;
+    background: silver;
+}
+
+
 .list-title {
     display: flex;
 }

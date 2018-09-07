@@ -35,7 +35,7 @@ const updateLayoutList = (counter,layouts) => {
 		popupDoc.getElementById("layout-list").style.display = "block";
 		let list = popupDoc.getElementById("layout-list");
 		list.innerHTML = "";
-		layouts.forEach(layout => {
+		layouts.forEach((layout,i) => {
 			let div = popupDoc.createElement("div");
 			div.setAttribute("class", "list-item");
 			let titleDiv = popupDoc.createElement("div");
@@ -52,6 +52,9 @@ const updateLayoutList = (counter,layouts) => {
 			div.appendChild(titleDiv);
 			div.appendChild(screensDiv);
 			list.appendChild(div);
+			if (i !== layouts.length-1) {
+				list.appendChild(popupDoc.createElement("hr"));
+			}
 		})
 	}
 }
